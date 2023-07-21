@@ -7,27 +7,28 @@ $id_temes = $_GET['id'];
 $crud = new crud($pdo);
 $results = $crud->getvalues();
 $temes = $crud->gettemes();
-$getexercici = $crud->getexercici($id_temes);
+$getexercicis = $crud->getexercicis($id_temes);
+$tema_titol = $_GET['tema_titol'];
 ?>
 <div class="row">
     <div class="col-sm"></div>
     <div class="col-sm">
         <?php 
         $exercicis = [];
-        $getexercici->execute();
-        while ($row = $getexercici->fetch(PDO::FETCH_ASSOC)){
+        $getexercicis->execute();
+        while ($row = $getexercicis->fetch(PDO::FETCH_ASSOC)){
             $exercicis[] = $row;
         }
         ?>
         <?php foreach (array_reverse($exercicis) as $i) : ?>
             <div class="mb-auto p-2">
-                <h5><?php echo $i['any']; ?></h5>
+                <h5><?php echo $i['any'] . " " .$tema_titol; ?></h5>
             </div>
             <div class="mb-auto p-2">
                 <img src="data:image/png;base64,<?php echo base64_encode($i['imatge']); ?>" alt="My image" width="600px">
             </div>
             <div class="mb-auto p-2">
-                <a href="<?php echo 'temes/show.php?id=' . $i['id_temes']; ?>" class="btn btn-primary">
+                <a href="<?php echo 'exercici_gran.php?id=' . $i['id_numero_exercici']. '&tema_titol='. $i['temes']; ?>" class="btn btn-primary">
                     Exercici <?php echo $i['numero_exercici']; ?>
                 </a>
             </div>

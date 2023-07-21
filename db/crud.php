@@ -18,16 +18,26 @@
             return $result;
         }
 
-        public function getexercici($id){
-            $sql = "SELECT exercicis_temes.any, exercicis_temes.id_temes, exercicis_temes.numero_exercici, exercicis_temes.imatge
+        public function getexercicis($id){
+            $sql = "SELECT *, temes.temes
             FROM exercicis_temes 
             JOIN temes ON exercicis_temes.id_temes = temes.id_temes
             WHERE temes.id_temes = $id";
             $result = $this->db->query($sql);
             return $result;
         }
-        public function gettema($id){
-            $sql = "SELECT temes FROM temes WHERE id_temes = $id";
+        
+       /*  public function getexercici($id){
+            $sql = "SELECT * FROM exercicis_temes WHERE id_numero_exercici = $id";
+            $result = $this->db->query($sql);
+            return $result;
+        } */
+
+        public function getexercici($id){
+            $sql = "SELECT *, temes.temes
+            FROM exercicis_temes 
+            JOIN temes ON exercicis_temes.id_temes = temes.id_temes
+            WHERE id_numero_exercici = $id";
             $result = $this->db->query($sql);
             return $result;
         }
